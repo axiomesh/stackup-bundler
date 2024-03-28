@@ -137,7 +137,9 @@ func TraceSimulateHandleOp(in *TraceInput) (*TraceOutput, error) {
 	}
 	out.Event = ev
 
-	if !ev.Success && len(res.Reverts) != 0 {
+	fmt.Printf("ev: %+v, res: %+v", ev, res)
+
+	if ev != nil && !ev.Success && len(res.Reverts) != 0 {
 		data, err := hexutil.Decode(res.Reverts[len(res.Reverts)-1])
 		if err != nil {
 			return out, err
