@@ -18,6 +18,8 @@ import (
 	"github.com/stackup-wallet/stackup-bundler/pkg/userop"
 )
 
+const addExtraGas = 100
+
 // Opts contains all the fields required for submitting a transaction to call HandleOps on the EntryPoint
 // contract.
 type Opts struct {
@@ -88,7 +90,7 @@ func EstimateHandleOpsGas(opts *Opts) (gas uint64, revert *reverts.FailedOpRever
 		return 0, revert, nil
 	}
 
-	return est, nil, nil
+	return est + addExtraGas, nil, nil
 }
 
 // HandleOps submits a transaction to send a batch of UserOperations to the EntryPoint.

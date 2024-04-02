@@ -3,6 +3,7 @@ package client
 
 import (
 	"errors"
+	"fmt"
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -118,6 +119,7 @@ func (i *Client) SetGetStakeFunc(fn stake.GetStakeFunc) {
 func (i *Client) SendUserOperation(op map[string]any, ep string) (string, error) {
 	// Init logger
 	l := i.logger.WithName("eth_sendUserOperation")
+	l.Info(fmt.Sprintf("user operation: %+v", op))
 
 	// Check EntryPoint and userOp is valid.
 	epAddr, err := i.parseEntryPointAddress(ep)
