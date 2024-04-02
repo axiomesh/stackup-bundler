@@ -1,11 +1,15 @@
 package simulation
 
 import (
-	stdError "errors"
+	"context"
 	"fmt"
+	"strings"
+	"time"
 
+	"github.com/ethereum/go-ethereum"
+	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/ethereum/go-ethereum/ethclient/gethclient"
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/stackup-wallet/stackup-bundler/pkg/entrypoint"
 	"github.com/stackup-wallet/stackup-bundler/pkg/entrypoint/reverts"
@@ -20,16 +24,33 @@ func SimulateValidation(
 	entryPoint common.Address,
 	op *userop.UserOperation,
 ) (*reverts.ValidationResultRevert, error) {
-	ep, err := entrypoint.NewEntrypoint(entryPoint, ethclient.NewClient(rpc))
+	// ep, err := entrypoint.NewEntrypoint(entryPoint, ethclient.NewClient(rpc))
+	// if err != nil {
+	// 	return nil, err
+	// }
+
+	// var res []interface{}
+	// rawCaller := &entrypoint.EntrypointRaw{Contract: ep}
+	// err = rawCaller.Call(nil, &res, "simulateValidation", entrypoint.UserOperation(*op))
+	// if err == nil {
+	// 	return nil, stdError.New("unexpected result from simulateValidation")
+	// }
+	gethClient := gethclient.New(rpc)
+	entrypointABI, err := abi.JSON(strings.NewReader(entrypoint.EntrypointABI))
 	if err != nil {
 		return nil, err
 	}
-
-	var res []interface{}
-	rawCaller := &entrypoint.EntrypointRaw{Contract: ep}
-	err = rawCaller.Call(nil, &res, "simulateValidation", entrypoint.UserOperation(*op))
+	input, err := entrypointABI.Pack("simulateValidation", entrypoint.UserOperation(*op))
+	if err != nil {
+		return nil, err
+	}
+	msg := ethereum.CallMsg{To: &entryPoint, Data: input}
+	t := time.Now().Unix()
+	_, err = gethClient.CallContractWithBlockOverrides(context.Background(), msg, nil, nil, gethclient.BlockOverrides{
+		Time: uint64(t),
+	})
 	if err == nil {
-		return nil, stdError.New("unexpected result from simulateValidation")
+		return nil, fmt.Errorf("unexpected result from simulateValidation")
 	}
 
 	sim, simErr := reverts.NewValidationResult(err)
