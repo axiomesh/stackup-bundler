@@ -1,5 +1,5 @@
 install-dev:
-	go install github.com/cosmtrek/air@latest
+	go install github.com/cosmtrek/air@v1.49.0
 	go mod tidy
 
 generate-environment:
