@@ -19,13 +19,14 @@ func ValidateVerificationGas(op *userop.UserOperation, ov *gas.Overhead, maxVeri
 		)
 	}
 
-	pvg, err := ov.CalcPreVerificationGas(op)
-	if err != nil {
-		return err
-	}
-	if op.PreVerificationGas.Cmp(pvg) < 0 {
-		return fmt.Errorf("preVerificationGas: %s below expected gas of %s", op.PreVerificationGas.String(), pvg.String())
-	}
+	// remove preVerificationGas local check, we use system contract, not check 
+	// pvg, err := ov.CalcPreVerificationGas(op)
+	// if err != nil {
+	// 	return err
+	// }
+	// if op.PreVerificationGas.Cmp(pvg) < 0 {
+	// 	return fmt.Errorf("preVerificationGas: %s below expected gas of %s", op.PreVerificationGas.String(), pvg.String())
+	// }
 
 	return nil
 }
