@@ -568,7 +568,17 @@
             "name": "paymasterAndData",
             "type": "bytes"
           },
-          { "internalType": "bytes", "name": "signature", "type": "bytes" }
+          { "internalType": "bytes", "name": "signature", "type": "bytes" },
+          {
+            "internalType": "bytes",
+            "name": "authData",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bytes",
+            "name": "clientData",
+            "type": "bytes"
+          }
         ],
         "internalType": "struct UserOperation",
         "name": "userOp",
@@ -624,7 +634,17 @@
                 "name": "paymasterAndData",
                 "type": "bytes"
               },
-              { "internalType": "bytes", "name": "signature", "type": "bytes" }
+              { "internalType": "bytes", "name": "signature", "type": "bytes" },
+              {
+                "internalType": "bytes",
+                "name": "authData",
+                "type": "bytes"
+              },
+              {
+                "internalType": "bytes",
+                "name": "clientData",
+                "type": "bytes"
+              }
             ],
             "internalType": "struct UserOperation[]",
             "name": "userOps",
@@ -635,7 +655,17 @@
             "name": "aggregator",
             "type": "address"
           },
-          { "internalType": "bytes", "name": "signature", "type": "bytes" }
+          { "internalType": "bytes", "name": "signature", "type": "bytes" },
+          {
+            "internalType": "bytes",
+            "name": "authData",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bytes",
+            "name": "clientData",
+            "type": "bytes"
+          }
         ],
         "internalType": "struct IEntryPoint.UserOpsPerAggregator[]",
         "name": "opsPerAggregator",
@@ -690,7 +720,17 @@
             "name": "paymasterAndData",
             "type": "bytes"
           },
-          { "internalType": "bytes", "name": "signature", "type": "bytes" }
+          { "internalType": "bytes", "name": "signature", "type": "bytes" },
+          {
+            "internalType": "bytes",
+            "name": "authData",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bytes",
+            "name": "clientData",
+            "type": "bytes"
+          }
         ],
         "internalType": "struct UserOperation[]",
         "name": "ops",
@@ -836,7 +876,17 @@
             "name": "paymasterAndData",
             "type": "bytes"
           },
-          { "internalType": "bytes", "name": "signature", "type": "bytes" }
+          { "internalType": "bytes", "name": "signature", "type": "bytes" },
+          {
+            "internalType": "bytes",
+            "name": "authData",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bytes",
+            "name": "clientData",
+            "type": "bytes"
+          }
         ],
         "internalType": "struct UserOperation",
         "name": "op",
@@ -888,7 +938,17 @@
             "name": "paymasterAndData",
             "type": "bytes"
           },
-          { "internalType": "bytes", "name": "signature", "type": "bytes" }
+          { "internalType": "bytes", "name": "signature", "type": "bytes" },
+          {
+            "internalType": "bytes",
+            "name": "authData",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bytes",
+            "name": "clientData",
+            "type": "bytes"
+          }
         ],
         "internalType": "struct UserOperation",
         "name": "userOp",
