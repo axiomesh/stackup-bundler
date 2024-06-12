@@ -3,6 +3,7 @@
 package relay
 
 import (
+	"fmt"
 	"math/big"
 	"time"
 
@@ -79,6 +80,8 @@ func (r *Relayer) SendUserOperation() modules.BatchHandlerFunc {
 		// Estimate gas for handleOps() and drop all userOps that cause unexpected reverts.
 		for len(ctx.Batch) > 0 {
 			est, revert, err := transaction.EstimateHandleOpsGas(&opts)
+			l := r.logger.WithName("sendUserOperation")
+			l.Info(fmt.Sprintf("estimate user operation gas: %d, revert: %v, err: %v", est, revert, err))
 
 			if err != nil {
 				return err

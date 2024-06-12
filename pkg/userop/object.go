@@ -216,6 +216,8 @@ func (op *UserOperation) MarshalJSON() ([]byte, error) {
 		MaxPriorityFeePerGas string `json:"maxPriorityFeePerGas"`
 		PaymasterAndData     string `json:"paymasterAndData"`
 		Signature            string `json:"signature"`
+		AuthData             string `json:"authData"`
+		ClientData           string `json:"clientData"`
 	}{
 		Sender:               op.Sender.String(),
 		Nonce:                hexutil.EncodeBig(op.Nonce),
@@ -228,6 +230,8 @@ func (op *UserOperation) MarshalJSON() ([]byte, error) {
 		MaxPriorityFeePerGas: hexutil.EncodeBig(op.MaxPriorityFeePerGas),
 		PaymasterAndData:     hexutil.Encode(op.PaymasterAndData),
 		Signature:            hexutil.Encode(op.Signature),
+		AuthData:             hexutil.Encode(op.AuthData),
+		ClientData:           hexutil.Encode(op.ClientData),
 	})
 }
 
