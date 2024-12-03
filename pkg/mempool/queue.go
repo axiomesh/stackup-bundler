@@ -10,10 +10,14 @@ import (
 
 type set struct {
 	all      *sortedset.SortedSet
+	lock     sync.RWMutex
 	entities map[common.Address]*sortedset.SortedSet
 }
 
 func (s *set) getEntitiesSortedSet(entity common.Address) *sortedset.SortedSet {
+	s.lock.Lock()
+	defer s.lock.Unlock()
+	
 	if _, ok := s.entities[entity]; !ok {
 		s.entities[entity] = sortedset.New()
 	}
